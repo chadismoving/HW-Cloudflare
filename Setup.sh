@@ -57,3 +57,7 @@ EOF
 #!Switch on WSGI and Nginx
 sudo gunicorn -b 8000 httpbin:app
 sudo systemctl restart nginx
+#!Install Cloudflared as services and enable for startup
+sudo cloudflared service install
+sudo systemctl start cloudflared
+sudo systemctl enable cloudflared
