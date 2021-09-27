@@ -1,0 +1,15 @@
+const destinationURL = "https://developers.cloudflare.com/workers/about/"
+const statusCode = 301
+
+addEventListener("fetch", async event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  let cookie = request.headers.get('cf-noredir') || ""
+  if (cookie.includes("true")) 
+    return fetch(request)
+    let response = await fetch(request)
+    response = new Response(response.body, response)
+  return Response.redirect(destinationURL, statusCode)
+}
